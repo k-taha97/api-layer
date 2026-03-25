@@ -1,0 +1,13 @@
+{
+  "layers": {
+    "identity": {
+      "pages": {
+        "connect": {
+          "welcome": "Welcome",
+          "description": "Please sign-in to your account and start the adventure",
+          "login": "Login"
+        }
+      }
+    }
+  }
+}

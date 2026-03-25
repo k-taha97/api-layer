@@ -1,0 +1,11 @@
+{
+  "name": "api-layer",
+  "type": "module",
+  "version": "1.0.0",
+  "dependencies": {
+    "@nuxtjs/i18n": "catalog:current"
+  },
+  "devDependencies": {
+    "nuxt": "catalog:current"
+  }
+}

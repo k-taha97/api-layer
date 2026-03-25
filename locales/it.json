@@ -1,0 +1,13 @@
+{
+  "layers": {
+    "auth": {
+      "pages": {
+        "connect": {
+          "welcome": "Benvenuto",
+          "description": "Accedi al tuo account e inizia l'avventura",
+          "login": "Accedi"
+        }
+      }
+    }
+  }
+}
