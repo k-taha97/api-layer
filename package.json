@@ -1,5 +1,5 @@
 {
-  "name": "api-layer",
+  "name": "@my-nuxt/api-layer",
   "type": "module",
   "version": "1.0.0",
   "dependencies": {
