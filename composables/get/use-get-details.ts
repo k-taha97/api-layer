@@ -4,6 +4,14 @@ import { computed, toRef, toRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useGetOne } from './use-get-one'
 
+export interface GetDetailsProps {
+  endpoint: string
+  idLabel?: string
+  customId?: string | null
+  hideLoading?: boolean
+  enabled?: boolean
+}
+
 export function useGetDetailsQuery(props: GetDetailsProps) {
   const propsRef = toRef(props)
   const { endpoint, idLabel, customId, enabled, hideLoading } = toRefs(props)
