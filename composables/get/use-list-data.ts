@@ -16,6 +16,7 @@ export interface ListDataProps {
   dataParamName?: string
   disabled?: boolean
   ignoredParams?: string[]
+  noDataImageSrc?: string
   config?: Omit<UseQueryOptions<unknown, Error, unknown, QueryKey>, 'queryKey'>
 }
 

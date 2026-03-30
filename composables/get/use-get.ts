@@ -24,7 +24,7 @@ export interface IGetProps {
 export function useGet({ url, config, params, requestType = 'api', accessToken, limit = 10 }: IGetProps) {
   const baseUrl = useApiManager(requestType)
 
-  const fullURL = `${baseUrl}/api/${API_VERSION}/${url}`
+  const fullURL = baseUrl ? `${baseUrl}/api/${API_VERSION}/${url}` : url
 
   const result = useQuery({
     queryKey: [fullURL, { page: 1, params, size: limit }],
