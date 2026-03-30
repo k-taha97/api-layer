@@ -1,9 +1,9 @@
 import type { QueryKey, UseQueryOptions } from '@tanstack/vue-query'
 
 declare global {
-  type PaginationType = 'simple' | 'pages'
+  export type PaginationType = 'simple' | 'pages'
 
-  interface ListDataProps {
+  export interface ListDataProps {
     endpoint: string
     pagination: PaginationType
     dataParamName?: string
@@ -12,7 +12,7 @@ declare global {
     config?: Omit<UseQueryOptions<unknown, Error, unknown, QueryKey>, 'queryKey'>
   }
 
-  interface GetDetailsProps {
+  export interface GetDetailsProps {
     endpoint: string
     idLabel?: string
     customId?: string | null
