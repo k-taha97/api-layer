@@ -1,24 +1,13 @@
-import type { QueryKey, UseQueryOptions } from '@tanstack/vue-query'
-
 import type { Ref } from 'vue'
 
-import type { IGenericObject } from '../../utils'
+import type { IGenericObject, ListDataProps } from '../../utils'
 import { computed, ref, toRef, toRefs, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { useGet } from './use-get'
+
 import { useInfiniteQuery } from './use-infinite-query'
 
 export type PaginationType = 'simple' | 'pages'
-
-export interface ListDataProps {
-  endpoint: string
-  pagination: PaginationType
-  dataParamName?: string
-  disabled?: boolean
-  ignoredParams?: string[]
-  noDataImageSrc?: string
-  config?: Omit<UseQueryOptions<unknown, Error, unknown, QueryKey>, 'queryKey'>
-}
 
 export function useListDataQuery(props: ListDataProps) {
   const propsRef = toRef(props)
