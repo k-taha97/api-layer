@@ -1,4 +1,4 @@
-import type { IGenericObject } from '../../utils'
+import type { GetDetailsProps, IGenericObject } from '../../utils'
 
 import { computed, toRef, toRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router'

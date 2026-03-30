@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url'
 import { defineNuxtConfig } from 'nuxt/config'
 
 const currentDir = dirname(fileURLToPath(import.meta.url))
+
 export default defineNuxtConfig({
   modules: [
     ['@nuxtjs/i18n', {
@@ -23,10 +24,13 @@ export default defineNuxtConfig({
 
   imports: {
     dirs: [
-      join(currentDir, 'types/**'),
       join(currentDir, 'composables/**'),
       join(currentDir, 'utils/**'),
     ],
+  },
+
+  exports: {
+    meta: true,
   },
 
   runtimeConfig: {
