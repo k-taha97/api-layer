@@ -1,7 +1,8 @@
-import { useAppMutation, type MutationProps } from '../use-mutation';
+import type { MutationProps } from '../use-mutation'
+import { useAppMutation } from '../use-mutation'
 
-const useDelete = ({ method = 'DELETE', ...props }: MutationProps) => {
-  return useAppMutation({ method, ...props });
-};
+function useDelete({ method = 'DELETE', ...props }: MutationProps) {
+  return useAppMutation({ method, ...props })
+}
 
-export { useDelete };
+export { useDelete }

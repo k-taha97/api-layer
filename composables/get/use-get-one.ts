@@ -1,30 +1,29 @@
 import type { QueryKey, UseQueryOptions } from '@tanstack/vue-query'
-import { useQuery } from '@tanstack/vue-query'
+import type { ApiRequestType } from '../../utils/constants'
 
-import { useAuthStore } from '@/store/auth'
+import { useQuery } from '@tanstack/vue-query'
+import { API_VERSION } from '../../utils/constants'
+import { useApiManager } from '../use-api-manager'
 import { fetcher } from './fetcher'
 
 interface Props {
   url: string
   id: string
   requestType?: ApiRequestType
+  accessToken?: string
   config?: Omit<UseQueryOptions<unknown, Error, unknown, QueryKey>, 'queryKey'>
 }
 
-export function useGetOne({ url, id, config, requestType = 'api' }: Props) {
+export function useGetOne({ url, id, config, requestType = 'api', accessToken }: Props) {
   const baseUrl = useApiManager(requestType)
-
-  const store = useAuthStore()
-
-  const { accessToken } = storeToRefs(store)
 
   const fullURL = `${baseUrl}/api/${API_VERSION}/${url}${id ? `/${id}` : ''}`
 
   const context = useQuery<any>({
     queryKey: [fullURL],
     queryFn: fetcher,
-    meta: { accessToken: accessToken.value },
-    enabled: !!accessToken.value,
+    meta: { accessToken },
+    enabled: !!accessToken,
     ...config,
   })
 

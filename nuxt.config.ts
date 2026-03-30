@@ -17,14 +17,6 @@ export default defineNuxtConfig({
     }],
   ],
 
-  components: [
-    {
-      path: join(currentDir, 'components'),
-      pathPrefix: false,
-      prefix: 'Api',
-    },
-  ],
-
   alias: {
     '@api': currentDir,
   },

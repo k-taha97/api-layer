@@ -1,16 +1,14 @@
+import type { IGenericObject } from '../../utils'
 import type { IGetProps } from './use-get'
 
 import { useInfiniteQuery as _useInfiniteQuery, useQueryClient } from '@tanstack/vue-query'
 
-import { useAuthStore } from '@/store/auth'
+import { computed } from 'vue'
+import { useApiManager } from '../use-api-manager'
 import { fetcher } from './fetcher'
 
-export function useInfiniteQuery({ url, config, params, requestType = 'api', dataParamName = 'data' }: IGetProps) {
+export function useInfiniteQuery({ url, config, params, requestType = 'api', dataParamName = 'data', accessToken, limit = 10 }: IGetProps) {
   const baseUrl = useApiManager(requestType)
-
-  const store = useAuthStore()
-
-  const { accessToken } = storeToRefs(store)
 
   const fullURL = `${baseUrl}/api/${url}`
 
@@ -19,7 +17,7 @@ export function useInfiniteQuery({ url, config, params, requestType = 'api', dat
   const { data, hasNextPage, isLoading, isFetchingNextPage, fetchNextPage, refetch } = _useInfiniteQuery({
     queryKey: [fullURL, params],
     queryFn: async ({ pageParam }) => {
-      const result: { [key: string]: unknown } = await fetcher({ client: queryClient, queryKey: [fullURL, { ...params?.value, page: pageParam + 1, size: LIMIT }], meta: { accessToken: accessToken.value } })
+      const result: { [key: string]: unknown } = await fetcher({ client: queryClient, queryKey: [fullURL, { ...params?.value, page: pageParam + 1, size: limit }], meta: { accessToken } })
       return {
         data: result?.[dataParamName] as Array<object>,
         total: result?.count as number,
@@ -27,7 +25,7 @@ export function useInfiniteQuery({ url, config, params, requestType = 'api', dat
       }
     },
     getNextPageParam: (pageParams) => {
-      const totalPages = Math.ceil(pageParams.total / LIMIT)
+      const totalPages = Math.ceil(pageParams.total / limit)
       if (pageParams.lastPage === totalPages)
         return undefined
 
@@ -35,7 +33,7 @@ export function useInfiniteQuery({ url, config, params, requestType = 'api', dat
     },
     initialPageParam: 0,
     meta: { accessToken },
-    enabled: !!accessToken.value,
+    enabled: !!accessToken,
     ...config,
   })
 
