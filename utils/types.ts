@@ -4,6 +4,8 @@ export interface IGenericObject {
   [key: string]: any
 }
 
+export type PaginationType = 'simple' | 'pages'
+
 export interface GetDetailsProps {
   endpoint: string
   idLabel?: string

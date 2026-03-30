@@ -7,8 +7,6 @@ import { useGet } from './use-get'
 
 import { useInfiniteQuery } from './use-infinite-query'
 
-export type PaginationType = 'simple' | 'pages'
-
 export function useListDataQuery(props: ListDataProps) {
   const propsRef = toRef(props)
   const { endpoint, pagination, dataParamName, disabled, config, ignoredParams } = toRefs(props)
