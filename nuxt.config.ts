@@ -1,8 +1,10 @@
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineNuxtConfig } from 'nuxt/config'
+import { createResolver } from 'nuxt/kit'
 
 const currentDir = dirname(fileURLToPath(import.meta.url))
+const { resolve } = createResolver(import.meta.url)
 
 export default defineNuxtConfig({
   modules: [
@@ -29,9 +31,29 @@ export default defineNuxtConfig({
     ],
   },
 
-  exports: {
-    meta: true,
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        paths: {
+          '#api-types': [resolve('./utils/types.ts')],
+        },
+      },
+    },
   },
+
+  hooks: {
+    'vite:extendConfig': (viteConfig) => {
+      viteConfig.resolve = viteConfig.resolve || {}
+      viteConfig.resolve.alias = {
+        ...viteConfig.resolve.alias,
+        '#api-types': resolve('./utils/types.ts'),
+      }
+    },
+  },
+
+  // exports: {
+  //   meta: true,
+  // },
 
   runtimeConfig: {
     public: {
